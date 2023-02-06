@@ -8,7 +8,6 @@
 <br> Запуск программы производится через main.py </br>
 
 <br><b>Запуск тестов:</b>
-<br><b>ДЛЯ ЗАПУСКА ТЕСТОВ НЕОБХОДИМО ИЗМЕНИТЬ ПУТЬ:
-
+<br><b>ДЛЯ ЗАПУСКА ТЕСТОВ НЕОБХОДИМО ИЗМЕНИТЬ ПУТЬ
 <br>В 14 СТРОКЕ НА:</b> self.transaction_data = open('../data/operations.json', 'rt', encoding="UTF-8")
 <br><b>Рабочее состояние программы:</b> self.transaction_data = open('data/operations.json', 'rt', encoding="UTF-8")
