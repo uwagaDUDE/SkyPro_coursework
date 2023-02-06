@@ -3,6 +3,8 @@ from datetime import datetime
 import interface
 error = interface.Errors()
 interface = interface.Interface()
+
+
 class Data:
 
     def __init__(self):
@@ -18,7 +20,6 @@ class Data:
                     self.ids.append(i['id'])
         self.counts = len(self.ids)
 
-
     def user_search(self, user_input):
         """
         Обработка и фильтрация запроса пользователя по ID или по номеру транзакции.
@@ -26,23 +27,20 @@ class Data:
         :return:
         """
         if user_input.isnumeric():
-            if int(user_input) not in range(1,self.counts) and int(user_input) not in self.ids:
+            if int(user_input) not in range(1, self.counts) and int(user_input) not in self.ids:
+                print(error.wrong_id())
                 return error.wrong_id()
 
             else:
                 if len(user_input) > 3:
                     for i in self.operations_dict:
                         if int(user_input) == i['id']:
-                            self.information(i)
-                            return
-
+                            return self.information(i)
 
                 if len(user_input) < 4:
                     for i in self.operations_dict:
                         if self.ids[int(user_input)-1] == i['id']:
-                            self.information(i)
-                            return
-
+                            return self.information(i)
 
         else:
             if user_input == "last":
@@ -52,9 +50,11 @@ class Data:
                         self.information(i)
                         ticker += 1
                         if ticker == 5:
-                            return
+                            x = "For test"
+                            return x
 
             else:
+                print(error.wrong_id())
                 return error.wrong_id()
 
     def information(self, i):
@@ -86,7 +86,7 @@ class Data:
 
             else:
                 card_number = card[2][12:]
-                card_type=''
+                card_type = ''
                 for c in card[0:2]:
                     card_type += c
                 return self.return_fuction(card, card_type, card_number, i)
@@ -94,8 +94,10 @@ class Data:
         else:
             card = i['to'].split()
             card_number = card[1]
-            return print(f'\n{interface.date_of_operation(self.date)} || {self.description}\n'
-                         f'{interface.open_new_wallet(card_number)}')
+            text = f'\n{interface.date_of_operation(self.date)} || {self.description}\n'\
+                   f'{interface.open_new_wallet(card_number)}'
+            print(text)
+            return text
 
     def return_fuction(self, card, card_type, card_number, i):
         """
@@ -105,9 +107,8 @@ class Data:
         :param i: Перебор объекта с операциями
         :return:
         """
-
-        print(f'\n{interface.date_of_operation(self.date)} || {self.description}\n'
-              f'{interface.operation_from_card(card, card_type, card_number)} -> {interface.operation_to(i["to"])}\n'
-              f'{interface.amount(i["operationAmount"]["amount"])} {i["operationAmount"]["currency"]["name"]}')
-
-
+        text = f'\n{interface.date_of_operation(self.date)} || {self.description}\n'\
+               f'{interface.operation_from_card(card, card_type, card_number)} -> {interface.operation_to(i["to"])}\n'\
+               f'{interface.amount(i["operationAmount"]["amount"])} {i["operationAmount"]["currency"]["name"]}'
+        print(text)
+        return text
