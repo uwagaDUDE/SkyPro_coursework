@@ -8,9 +8,11 @@ import scripts, interface
 data = scripts.Data()
 interface = interface.Interface()
 
-def main():
+if __name__ == '__main__':
     interface.greetings()
     interface.operations_count(data.counts)
     data.user_search(interface.find_operaiton())
-main()
-input()
+
+    #инпут для того, чтобы программа не выключалась после вывода информации на экран, если запускать через консоль
+    input()
+
