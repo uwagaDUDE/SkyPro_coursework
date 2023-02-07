@@ -22,8 +22,19 @@ class Interface:
         else:
             return f"Перевод от: {card_type} **** **** **** {card_number}"
 
-    def operation_to(self, op_to):
-        return f"Перевод кому: {op_to}"
+    def operation_to_card(self, card):
+        if "Счет" in card:
+            return f"Перевод кому: {card}"
+        else:
+            splitted_card = card.split()
+            if len(splitted_card) > 2:
+                card_name = splitted_card[0,1]
+                card_number = splitted_card[2]
+                return f"Перевод кому: {card_name} **** **** **** {card_number[-4:]}"
+            else:
+                card_name = splitted_card[0]
+                card_number = splitted_card[1]
+            return f"Перевод кому: {card_name} **** **** **** {card_number[-4:]}"
 
     def amount(self, amount):
         return f'Сумма перевода: {amount}'

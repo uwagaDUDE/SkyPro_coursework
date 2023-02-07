@@ -2,15 +2,7 @@ import scripts
 
 test = scripts.Data()
 """ 
-ДЛЯ ЗАПУСКА ТЕСТОВ НЕОБХОДИМО ИЗМЕНИТЬ ПУТЬ:
-В 14 СТРОКЕ НА: 
-self.transaction_data = open('../data/operations.json', 'rt', encoding="UTF-8")
-
-Рабочее состояние программы:
-self.transaction_data = open('data/operations.json', 'rt', encoding="UTF-8")
-
 Для запуска ввести в терминале: pytest --cov
-
 """
 class Tests:
      def test_user_search(self):
@@ -31,6 +23,10 @@ class Tests:
          assert test.user_search('last') == ('For test')
 
          assert test.user_search("asdadasd") == ('Введеный номер операции или ID не найдены.')
+
+         assert test.user_search("743278119") == ('\nВремя операции: 15.10.2018 08:05:34 || Тип операции: Перевод с карты на карту\n'
+                                                  'Перевод от: MasterCard **** **** **** 8409 -> Перевод кому: Maestro **** **** **** 9235\n'
+                                                  'Сумма перевода: 51203.12 USD')
 
 
 
