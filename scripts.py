@@ -34,12 +34,13 @@ class Data:
             else:
                 if len(user_input) > 3:
                     for i in self.operations_dict:
-                        if int(user_input) == i['id']:
+                        if (id_key := i.get('id')) and id_key == int(user_input):
                             return self.information(i)
 
                 if len(user_input) < 4:
                     for i in self.operations_dict:
-                        if self.ids[int(user_input)-1] == i['id']:
+                        x = int(user_input)-1
+                        if (id_key := i.get('id')) and id_key == self.ids[x]:
                             return self.information(i)
 
         else:
@@ -52,6 +53,8 @@ class Data:
                         if ticker == 5:
                             x = "For test"
                             return x
+                    else:
+                        print('Ошибка 3')
 
             else:
                 print(error.wrong_id())
@@ -108,7 +111,8 @@ class Data:
         :return:
         """
         text = f'\n{interface.date_of_operation(self.date)} || {self.description}\n'\
-               f'{interface.operation_from_card(card, card_type, card_number)} -> {interface.operation_to(i["to"])}\n'\
+               f'{interface.operation_from_card(card, card_type, card_number)} -> ' \
+               f'{interface.operation_to_card(i["to"])}\n'\
                f'{interface.amount(i["operationAmount"]["amount"])} {i["operationAmount"]["currency"]["name"]}'
         print(text)
         return text
